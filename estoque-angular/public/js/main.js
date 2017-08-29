@@ -1,1 +1,1 @@
-angular.module('estoque',[]);
+angular.module('estoque', ['estoqueDiretivas', 'ngAnimate']);
