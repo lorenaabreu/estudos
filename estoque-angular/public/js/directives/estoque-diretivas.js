@@ -35,4 +35,21 @@ angular.module('estoqueDiretivas',[])
 	return ddo;
 
 	
+})
+.directive('minhaFoto', function(){
+	
+	var ddo = {};
+	
+	ddo.restrict = 'AE';
+	
+	ddo.scope ={
+			url: '@',
+			titulo: '@'
+	
+	}
+	
+	ddo.templateUrl = 'js/directives/minha-foto.html';
+	
+	return ddo;
+	
 });

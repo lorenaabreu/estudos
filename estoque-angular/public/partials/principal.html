@@ -1,0 +1,31 @@
+	<div class="jumbotron">
+		<h1 class="text-center">Estoque</h1> 
+	</div>
+	
+	<p class="alert alert-info" ng-show="mensagem.length">{{ mensagem }}</p>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<form>
+				<div class="input-group">
+					<span class="input-group-btn">
+						<a href="produtos/cadastro" class="btn btn-primary"> Novo Produto </a>
+					</span>
+					<input ng-model="filtro" ng-model-options="{ debounce: 500 }" class="form-control" placeholder="Pesquisa" >
+				</div>
+				
+			</form>
+		</div><!-- fim col-md-12 --> 
+	
+	</div><!-- fim row --> 
+	
+	<div class="row">
+		<meu-painel class="col-md-2 painel-animado" ng-repeat="produto in produtos | filter: {titulo:filtro}" titulo="{{produto.titulo}}">
+	   	
+			<minha-foto url="{{produto.url}}" titulo="{{produto.titulo}}"></minha-foto>	
+			
+			<a href="produtos/editar/{{produto._id}}" class="btn btn-primary btn-block"> Editar </a>
+			<button ng-click="remover(produto)" class="btn btn-danger btn-block"> Remover </button>			
+	   	
+	   	</meu-painel><!-- fim panel -->
+	</div>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br" ng-app="estoque">
     <head>
+    	<base href="/">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <title>Estoque</title>
@@ -9,37 +10,16 @@
         <link rel="stylesheet" href="css/efeitos.css">
         <script src="js/lib/angular.min.js"></script>
         <script src="js/lib/angular-animate.min.js"></script>
+        <script src="js/lib/angular-route.min.js"></script>
         <script src="js/main.js"></script>
+		<script src="js/controllers/produtos-controller.js"></script>
 		<script src="js/controllers/produto-controller.js"></script>
 		<script src="js/directives/estoque-diretivas.js"></script>
     </head>
-    <body ng-controller="ProdutoController">
+    <body>
         <div class="container">
         	
-        	<div class="jumbotron">
-        		<h1 class="text-center">Estoque</h1> 
-        	</div>
-        	
-        	<div class="row">
-        		<div class="col-md-12">
-        			<form>
-        				<input ng-model="filtro" ng-model-options="{ debounce: 500 }" class="form-control" placeholder="Pesquisa" >
-        			</form>
-        		</div><!-- fim col-md-12 --> 
-        	
-        	</div><!-- fim row --> 
-        	
-        	<div class="row">
-        		<meu-painel class="col-md-2 painel-animado" ng-repeat="produto in produtos | filter: nome=filtro" titulo="{{produto.titulo}}">
-            	
-        			<img class="img-responsive center-block" src="{{produto.url}}" alt="{{produto.titulo}}"></img>	
-            	
-            	</meu-painel><!-- fim panel -->
-        	</div>
-            
-            
-
-          
+        	<ng-view></ng-view>
             
         </div> <!-- fim container -->        
     </body>

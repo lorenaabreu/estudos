@@ -1,0 +1,47 @@
+<div class="page-header text-center">
+	<h1> {{produto.titulo}} </h1>
+</div>
+
+<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+
+<form novalidate name="formProd" class="row" ng-submit="submeter()">
+	<div class="col-md-6">
+		<div class="form-group">
+			<label>Nome</label>
+			<input ng-model="produto.titulo" class="form-control" name="titulo" required ng-maxlength="20">
+			<span ng-show="formProd.$submitted && formProd.titulo.$error.required" class="form-control alert-danger">
+				Título obrigatório
+			</span>
+			<span ng-show="formProd.titulo.$error.maxlength" class="form-control alert-danger">
+				Tamanho maximo do titulo eh de 20 caracteres.
+			</span>
+		</div>
+		<div class="form-group">
+			<label>URL</label>
+			<input ng-model="produto.url" class="form-control" name="url" required>
+			<span ng-show="formProd.$submitted && formProd.url.$error.required" class="form-control alert-danger">
+				URL obrigatória.
+			</span>
+		</div>
+		<div class="form-group">
+			<label>Descricao</label>
+			<textarea ng-model="produto.descricao" class="form-control" name="descricao" ng-maxlength="200"></textarea>
+			<span ng-show="formProd.descricao.$error.maxlength" class="form-control alert-danger">
+				Tamanho máximo da descrição é de 200 caracteres.
+			</span>
+		</div>
+		
+		<button type="submit" class="btn btn-primary" ng-disabled="formProd.$invalid">
+			Salvar
+		</button>
+		<button class="btn btn-primary" ng-click="limpar()" ng-disabled="formProd.$invalid">
+			Limpar
+		</button>
+		<a href="/" class="btn btn-primary"> Voltar </a>
+		<hr>
+	</div>
+	<div class="col-md-6">
+		<minha-foto url="{{produto.url}}" titulo="{{produto.titulo}}"></minha-foto>
+	</div>
+
+</form>
