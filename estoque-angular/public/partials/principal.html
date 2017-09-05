@@ -2,7 +2,10 @@
 		<h1 class="text-center">Estoque</h1> 
 	</div>
 	
-	<p class="alert alert-info" ng-show="mensagem.length">{{ mensagem }}</p>
+	<p class="alert alert-info" ng-show="mensagem.length">
+		{{ mensagem }}
+		<a href='/' class="btn btn-primary" ng-click = "desfazer()"> Desfazer </a>
+	</p>
 	
 	<div class="row">
 		<div class="col-md-12">
@@ -28,4 +31,7 @@
 			<meu-botao-perigo acao="remover(produto)" nome="Remover"></meu-botao-perigo>			
 	   	
 	   	</meu-painel><!-- fim panel -->
+	</div>
+	<div class="row">
+		<meus-titulos></meus-titulos>	
 	</div>

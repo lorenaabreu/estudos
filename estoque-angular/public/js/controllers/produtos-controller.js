@@ -1,6 +1,7 @@
-angular.module('estoque').controller('ProdutosController', function($scope, recursoProduto){
+angular.module('estoque').controller('ProdutosController', function($scope, recursoProduto, cadastroDeProdutos){
 	
 	$scope.produtos = [];
+	$scope.produto = {};
 	$scope.filtro = '';
 	$scope.mensagem ='';
 	
@@ -14,6 +15,7 @@ angular.module('estoque').controller('ProdutosController', function($scope, recu
 	$scope.remover = function(produto){
 		
 		recursoProduto.delete({prodId: produto._id}, function(){
+			$scope.produto = produto;
 			var indexProduto = $scope.produtos.indexOf(produto);
 			$scope.produtos.splice(indexProduto, 1);
 			$scope.mensagem = 'Produto ' + produto.titulo + ' foi removido com sucesso.';
@@ -23,6 +25,16 @@ angular.module('estoque').controller('ProdutosController', function($scope, recu
 			$scope.mensagem = 'Erro ao remover o Produto '+ produto.titulo;
 		});
 		
+	};
+	
+	$scope.desfazer = function (){
+		recursoProduto.save($scope.produto, function(){
+			$scope.produtos.push($scope.produto);
+			$scope.mensagem ='';
+		}, function(erro){
+			console.log(erro);
+		});
+			
 	};
 	
 });

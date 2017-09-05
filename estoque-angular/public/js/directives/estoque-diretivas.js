@@ -1,4 +1,4 @@
-angular.module('estoqueDiretivas',[])
+angular.module('estoqueDiretivas',['estoqueServicos'])
 .directive('meuPainel', function() {
 	//O nome da diretiva vai ser trocado por hifen
 	//ou seja, para utilizar no html vira a tag
@@ -104,5 +104,32 @@ angular.module('estoqueDiretivas',[])
 			element[0].focus();
 		});
 	};
+	return ddo;
+})
+.directive('meusTitulos', function(){
+	var ddo = {};
+	
+	ddo.restrict = 'E';
+	
+	ddo.scope = {
+			
+	};
+	
+	ddo.template = '<ul><li ng-repeat="titulo in titulos">{{titulo}}</li></ul>'; 
+	
+	/*propriedade da diretiva q simula um controller e, portanto
+	 * é possível obter $scopo e tudo o mais que um controller
+	 * obtém*/
+	ddo.controller = function($scope, recursoProduto){
+		recursoProduto.query(function(produtos){
+			$scope.titulos = produtos.map(function(produto){
+				return produto.titulo;
+			});
+		}, function(erro){
+			console.log(erro);
+		});
+	}
+	
+	
 	return ddo;
 });
