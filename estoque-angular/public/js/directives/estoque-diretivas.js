@@ -67,4 +67,42 @@ angular.module('estoqueDiretivas',[])
 	
 	ddo.templateUrl = 'js/directives/meu-botao-perigo.html'
 	return ddo;
+})
+.directive('meuFocus', function(){
+	var ddo = {};
+	
+	ddo.restrict = 'A';
+	
+	/*O '=' permite uma comunicação bidirecional
+	 * para que tanto o controller saiba quando a diretiva
+	 * estiver alterando o valor e vice-versa*/
+	/*ddo.scope = {
+			focado: '='
+	};*/
+	
+	
+	/* Toda compilação no angular retorna uma função de link que dá acesso ao escopo da diretiva 
+	 * ao elemento do dom que se quer trabalhar. É somente na fase link q pode utilizar watchers (escutadores)*/
+	ddo.link = function(scope, element){
+		/*$watch vai ficar escutando um elemento (primeiro parametro) para que, sempre q ele for alterado
+		 * seja executado o código dentro.
+		 * */
+		/*scope.$watch('focado', function(){
+			if(scope.focado){
+				/*O angular utiliza o JQLite e não o JQuery, por tanto, para obter a função de focus precisa ir ao elemento DOM
+				 * que está encapsulado no elemento JQLite. Esse elemento DOM é o primeiro do array, por isso o índice 0.
+				 * Se fosse com JQuery seria possível fazer diretamente element.focus();*/
+			/*	element[0].focus();
+				scope.focado = false;
+			}
+		});*/
+		/*Essa propriedade é para escutar o evento disparado pelo controller
+		 * em substituição do watch, pois este último é muito custoso.
+		 * Acaba nem precisando mais do scope privado da diretiva, pois
+		 * vai escutar evento e não mais a propriedade privada de focado*/
+		scope.$on('produtoCadastrado', function(){
+			element[0].focus();
+		});
+	};
+	return ddo;
 });

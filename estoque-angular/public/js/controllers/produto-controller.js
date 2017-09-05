@@ -27,6 +27,11 @@ angular.module('estoque').controller('ProdutoController', function($scope, cadas
 			.then(function(retorno){
 				$scope.mensagem = retorno.mensagem;
 				if (retorno.inclusao) $scope.limpar();
+				//$scope.focado = true;
+				/*a proriedade $broadcast dispara um evento para
+				 * todo o scopo angular. Esse evento vai ser utilizado
+				 * para substituir o $watch ( que é muito custoso ) da diretiva */
+				//$scope.$broadcast('produtoCadastrado') - vai pro serviço
 			})
 			.catch(function(erro){
 				$scope.mensagem = erro.mensagem;
