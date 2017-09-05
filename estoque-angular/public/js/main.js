@@ -1,4 +1,4 @@
-angular.module('estoque', ['estoqueDiretivas', 'ngAnimate', 'ngRoute'])
+angular.module('estoque', ['estoqueDiretivas', 'estoqueServicos' , 'ngAnimate', 'ngRoute'])
 .config(function($routeProvider, $locationProvider){
 	//Configuração de rotas, informando 
 	//qual a palavra chave com o controller correspondente

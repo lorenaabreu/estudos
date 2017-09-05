@@ -25,7 +25,7 @@
 			<minha-foto url="{{produto.url}}" titulo="{{produto.titulo}}"></minha-foto>	
 			
 			<a href="produtos/editar/{{produto._id}}" class="btn btn-primary btn-block"> Editar </a>
-			<button ng-click="remover(produto)" class="btn btn-danger btn-block"> Remover </button>			
+			<meu-botao-perigo acao="remover(produto)" nome="Remover"></meu-botao-perigo>			
 	   	
 	   	</meu-painel><!-- fim panel -->
 	</div>

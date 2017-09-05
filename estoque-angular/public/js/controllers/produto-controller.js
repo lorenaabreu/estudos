@@ -1,54 +1,56 @@
-angular.module('estoque').controller('ProdutoController', function($scope, $http, $routeParams){
+angular.module('estoque').controller('ProdutoController', function($scope, cadastroDeProdutos, recursoProduto, $routeParams){
 	
 	$scope.produto = {};
 	$scope.mensagem ='';
+	$scope.url = '';
+	
+	
 	
 	if($routeParams.prodId){
-		$http.get('v1/fotos/'+ $routeParams.prodId)
-		.success(function(produto){
+		$scope.editar = true;
+		$scope.inclusao = false;
+		recursoProduto.get({prodId: $routeParams.prodId}, function(produto){
 			$scope.produto = produto;
-		})
-		.error(function(erro){
+		}, function(erro){
 			console.log(erro);
 			$scope.mensagem = 'Não foi possível encontrar o produto de ID '+ $routeParams.prodId;
 		});
+	} else{
+		$scope.editar = false;
+		$scope.inclusao = true;
 	};
 	
 	$scope.submeter = function(){
 		if($scope.formProd.$valid){
-			if($scope.produto._id){
-				$http.put('v1/fotos/'+ $scope.produto._id, $scope.produto)
-				.success(function(){
-					$scope.mensagem = 'Produto '+ $scope.produto.titulo + ' alterado com sucesso.';
-				})
-				.error(function(erro){
-					console.log(erro);
-					$scope.mensagem = 'Erro ao alterar o produto '+ $scope.produto.titulo;
-				})
-			} else{
-				$http.post('v1/fotos', $scope.produto)
-				.success(function(){
-					$scope.mensagem = 'Produto inserido com sucesso';
-				})
-				.error(function(erro){
-					$scope.mensagem = 'Erro na inserção do produto.';
-					console.log(erro);
-				});	
-				
-			};
+			
+			cadastroDeProdutos.cadastrar($scope.produto)
+			.then(function(retorno){
+				$scope.mensagem = retorno.mensagem;
+				if (retorno.inclusao) $scope.limpar();
+			})
+			.catch(function(erro){
+				$scope.mensagem = erro.mensagem;
+			});
 			
 		};
 		
 	};
 	
 	
-	$scope.limpar = function(){
+	$scope.limparEdit = function(){
 		$scope.formProd.$submitted = false;
 		$scope.mensagem = '';
-		$scope.produto = {
-				url: '',
-				titulo:''
-		};
+		$scope.produto = {};
+	
+		$scope.url = '/produtos/cadastro';
+			
+	};
+	
+	$scope.limpar = function(){
+		$scope.formProd.$submitted = false;
+		//$scope.mensagem = '';
+		$scope.produto = {};
+	
 	};
 	
 });

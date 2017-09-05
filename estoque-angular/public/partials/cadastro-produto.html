@@ -47,9 +47,14 @@
 		<button type="submit" class="btn btn-primary" ng-disabled="formProd.$invalid">
 			Salvar
 		</button>
-		<button class="btn btn-primary" ng-click="limpar()" ng-disabled="formProd.$invalid">
+		<a href="{{url}}" class="btn btn-primary" ng-click="limparEdit()" ng-disabled="formProd.$invalid" ng-show="editar">
+			Limpar
+		</a>
+		
+		<button class="btn btn-primary" ng-click="limpar()" ng-disabled="formProd.$invalid" ng-show="inclusao">
 			Limpar
 		</button>
+		
 		<a href="/" class="btn btn-primary"> Voltar </a>
 		<hr>
 	</div>

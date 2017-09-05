@@ -1,13 +1,12 @@
-angular.module('estoque').controller('GruposController', function($scope, $http){
+angular.module('estoque').controller('GruposController', function($scope, recursoGrupo){
 	
 	$scope.grupos = [];
 	$scope.mensagem = '';
 	
-	$http.get('v1/grupos')
-	.success(function(grupos){
+	recursoGrupo.query(function(grupos){
 		$scope.grupos = grupos;
-	})
-	.error(function(erro){
+	}, function(erro){
 		console.log(erro);
-	});
+	});	
+	
 });

@@ -52,4 +52,19 @@ angular.module('estoqueDiretivas',[])
 	
 	return ddo;
 	
+})
+.directive('meuBotaoPerigo', function(){
+	var ddo = {};
+	
+	ddo.restrict = 'E'
+		
+	//utiliza-se o '&' quando deseja passar uma expressão para a diretiva
+	//uma vez que o '@' obtem a string literal
+	ddo.scope={
+			acao:'&',
+			nome:'@'
+	}
+	
+	ddo.templateUrl = 'js/directives/meu-botao-perigo.html'
+	return ddo;
 });
